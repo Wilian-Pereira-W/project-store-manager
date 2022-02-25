@@ -13,7 +13,6 @@ app.get('/', (_request, response) => {
 });
 
 app.get('/products', productsController.getAll);
-
 app.get('/products/:id', productIdController.getById);
 
 app.get('/sales', salesController.getAll);
