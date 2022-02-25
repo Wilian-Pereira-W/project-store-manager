@@ -1,5 +1,4 @@
 const validateQuantitySales = (req, res, next) => {
-  try {
    const [sales] = req.body;
     if (!sales.quantity) return res.status(400).json({ message: '"quantity" is required' });
             if (Number(sales.quantity) <= 0 || !Number.isInteger(sales.quantity)) { 
@@ -8,9 +7,6 @@ const validateQuantitySales = (req, res, next) => {
                     ); 
             }
     next();
-  } catch (error) {
-    next(error);
-  }
 };
 
 module.exports = validateQuantitySales;
