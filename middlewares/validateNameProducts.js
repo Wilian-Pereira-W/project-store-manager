@@ -1,5 +1,4 @@
 const validateName = (req, res, next) => {
-  try {
     const { name } = req.body;
     if (!name) return res.status(400).json({ message: '"name" is required' });
             if (name.length < 5 || !typeof name === 'string') { 
@@ -8,9 +7,6 @@ const validateName = (req, res, next) => {
                     ); 
             }
             next();
-  } catch (error) {
-    next(error);
-  }
 };
 
 module.exports = validateName;
