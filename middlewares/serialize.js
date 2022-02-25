@@ -5,10 +5,4 @@ const serialize = (sale) => ({
   quantity: sale.quantity,
 });
 
-const serializeId = (sale) => ({
-  date: sale.date,
-  productId: sale.product_id,
-  quantity: sale.quantity,
-});
-
-module.exports = { serialize, serializeId };
+module.exports = serialize;
