@@ -1,5 +1,5 @@
 const connection = require('./connection');
-const serializeMiddlewares = require('../middlewares/serialize');
+const { serialize, serializeById } = require('../middlewares');
 
 const getAll = async () => {
   const SELECT = `SELECT saleProducts.sale_id, sale.date,  saleProducts.product_id, 
@@ -10,7 +10,7 @@ const getAll = async () => {
   const ORDERBY = 'ORDER BY saleProducts.sale_id, saleProducts.product_id'; 
   const [sales] = await connection
   .execute(`${SELECT} ${FROM} ${INNERJOIN} ${ON} ${ORDERBY}`);
-  return sales.map(serializeMiddlewares.serialize);
+  return sales.map(serialize);
 }; 
 
 const getById = async (id) => {
@@ -23,7 +23,7 @@ const getById = async (id) => {
   const ORDERBY = 'ORDER BY saleProducts.sale_id, saleProducts.product_id'; 
   const [sales] = await connection
   .execute(`${SELECT} ${FROM} ${INNERJOIN} ${ON} ${WHERE} ${ORDERBY}`, [id]);
-  return sales.map(serializeMiddlewares.serializeId);
+  return sales.map(serializeById);
 };
 
 module.exports = { getAll, getById };
