@@ -1,15 +1,32 @@
 const productsModel = require('../models/productsModel');
 
 const getAll = async () => {
-  const products = await productsModel.getAll();
+  try {
+    const products = await productsModel.getAll();
 
   return products;
+  } catch (error) {
+    return console.log(error);
+  }
 };
 
 const getById = async (id) => {
-  const product = await productsModel.getById(id);
+  try {
+    const product = await productsModel.getById(id);
 
-  return product;
+    return product;
+  } catch (error) {
+    return console.log(error);
+  }
 };
 
-module.exports = { getAll, getById };
+const addProduct = async (name, quantity) => {
+  try {
+    const product = await productsModel.addProduct(name, quantity);
+  return product;
+  } catch (error) {
+    return console.log(error);
+  }
+};
+
+module.exports = { getAll, getById, addProduct };
