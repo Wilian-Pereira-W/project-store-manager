@@ -33,4 +33,16 @@ const addProduct = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getById, addProduct };
+const updateProduct = async (req, res, next) => {
+  const { name, quantity } = req.body;
+  const { id } = req.params;
+  try {
+    const product = await productsServices.updateProduct({ id, name, quantity });
+    if (!product) return res.status(404).json({ message: 'Product not found' });
+    return res.status(200).json(product);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAll, getById, addProduct, updateProduct };
