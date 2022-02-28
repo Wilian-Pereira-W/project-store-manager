@@ -5,4 +5,10 @@ const serialize = (sale) => ({
   quantity: sale.quantity,
 });
 
-module.exports = serialize;
+const serializeById = (sale) => ({
+  date: sale.date,
+  productId: sale.product_id,
+  quantity: sale.quantity,
+});
+
+module.exports = { serialize, serializeById };
