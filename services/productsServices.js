@@ -29,4 +29,17 @@ const addProduct = async (name, quantity) => {
   }
 };
 
-module.exports = { getAll, getById, addProduct };
+const updateProduct = async (product) => {
+  const id = Number(product.id);
+  try {
+    const updateProduc = await productsModel.updateProduct(id, product.name, product.quantity);
+    if (!updateProduc.affectedRows) {
+      return null;
+    }
+    return { ...product, id };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getAll, getById, addProduct, updateProduct };
