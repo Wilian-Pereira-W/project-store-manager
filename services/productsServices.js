@@ -42,4 +42,16 @@ const updateProduct = async (product) => {
   }
 };
 
-module.exports = { getAll, getById, addProduct, updateProduct };
+const excludeProduct = async (id) => {
+  try {
+    const product = await productsModel.excludeProduct(id);
+    if (!product.affectedRows) {
+      return null;
+    }
+    return product;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getAll, getById, addProduct, updateProduct, excludeProduct };
