@@ -25,7 +25,11 @@ app.post('/products',
 validateNameProducts, 
 validateQuantityProducts,
 productsController.addProduct);
-app.put('/products/:id', validateNameProducts, validateQuantityProducts);
+
+app.put('/products/:id', 
+validateNameProducts, 
+validateQuantityProducts, 
+productsController.updateProduct);
 
 app.get('/sales', salesController.getAll);
 app.get('/sales/:id', salesController.getById);
