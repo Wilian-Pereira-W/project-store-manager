@@ -42,4 +42,17 @@ const addSales = async (sales) => {
   };
 };
 
-module.exports = { getAll, getById, addSales };
+const updateSales = async (sales, id) => {
+ await sales.forEach(async (sale) => {
+ await connection
+  .execute(`UPDATE StoreManager.sales_products SET 
+  product_id = ?, quantity = ? WHERE sale_id = ? AND product_id = ?; `,
+ [sale.productId, sale.quantity, id, sale.productId]); 
+});
+ return {
+   saleId: id,
+   itemUpdated: sales,
+ };
+};
+
+module.exports = { getAll, getById, addSales, updateSales };
