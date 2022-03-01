@@ -37,7 +37,7 @@ app.get('/sales', salesController.getAll);
 app.get('/sales/:id', salesController.getById);
 
 app.post('/sales', validateProductsIdSales, validateQuantitySales, salesController.addSales);
-app.put('/sales/:id', validateProductsIdSales, validateQuantitySales);
+app.put('/sales/:id', validateProductsIdSales, validateQuantitySales, salesController.updateSales);
 
 app.listen(process.env.PORT, () => {
   console.log(`Escutando na porta ${process.env.PORT}`);
