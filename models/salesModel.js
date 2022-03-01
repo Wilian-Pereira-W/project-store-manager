@@ -26,4 +26,20 @@ const getById = async (id) => {
   return sales.map(serialize.serializeById);
 };
 
-module.exports = { getAll, getById };
+const addSales = async (sales) => {
+  const [result] = await connection.execute('INSERT INTO StoreManager.sales (date) VALUE(now());');
+
+  await sales.forEach(async (sale) => {
+    await connection
+      .execute(`INSERT INTO 
+      StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?,?,?);`,
+      [result.insertId, sale.productId, sale.quantity]); 
+  });
+
+  return {
+    id: result.insertId,
+    itemsSold: sales,
+  };
+};
+
+module.exports = { getAll, getById, addSales };
