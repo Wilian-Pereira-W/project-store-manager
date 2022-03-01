@@ -36,7 +36,7 @@ app.delete('/products/:id', productsController.excludeProduct);
 app.get('/sales', salesController.getAll);
 app.get('/sales/:id', salesController.getById);
 
-app.post('/sales', validateProductsIdSales, validateQuantitySales);
+app.post('/sales', validateProductsIdSales, validateQuantitySales, salesController.addSales);
 app.put('/sales/:id', validateProductsIdSales, validateQuantitySales);
 
 app.listen(process.env.PORT, () => {
