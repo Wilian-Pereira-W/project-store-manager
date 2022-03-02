@@ -63,3 +63,47 @@ describe('Busca todos dos produtos do banco de dados', () => {
     })
   });
 });
+
+describe('Busca um produto por id no banco de dados', () => {
+  // describe('Quando não existe nenhum produto', () => {
+  //   before(() => {
+  //     const execute = [[]];
+  //     sinon.stub(connection, 'execute').resolves(execute);
+  //   });
+
+  //   after(() =>{
+  //     connection.execute.restore();
+  //   });
+
+  //   it('retorna null', async () => {
+  //     const response = await productsModel.getById();
+  //     expect(response).to.be.equal(null);
+  // });
+
+  describe('Quando existe produto', () => {
+    before(() => {
+      const execute =   {
+        "id": 1,
+        "name": "produto A",
+        "quantity": 10
+      };
+      sinon.stub(productsModel, 'getById').resolves(execute);
+    });
+
+    after(() =>{
+      productsModel.getById.restore();
+    });
+    it('Retorna um object', async () => {
+      const result = await productsModel.getById(1);
+      expect(result).to.be.an('object');
+    });
+    it('O object não estar vazio', async () => {
+      const result = await productsModel.getById(1);
+      expect(result).to.be.not.empty;
+    })
+    it('O item ter as propriedades "id", "name", "quantity"', async () => {
+      const item = await productsModel.getById(1);
+      expect(item).to.include.all.keys('id', 'name', 'quantity');
+    })
+  });
+});
